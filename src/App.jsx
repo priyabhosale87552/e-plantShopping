@@ -1,5 +1,5 @@
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Link, Routes, Route, Navigate } from 'react-router-dom';
 import ProductList from './ProductList';
 import AboutUs from './AboutUs';
 import CartItem from './CartItem';
@@ -11,14 +11,12 @@ function App() {
       <Route path="/" element={
         <div className="landing-page">
           <div className="landing-content">
+            <p className="landing-eyebrow">GROW A LITTLE PARADISE</p>
             <h1>Paradise Nursery</h1>
             <p>Bring nature home with our beautiful collection of houseplants.</p>
-            <button
-              className="get-started-button"
-              onClick={() => window.location.href = '/plants'}
-            >
+            <Link className="get-started-button" to="/plants">
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       } />
