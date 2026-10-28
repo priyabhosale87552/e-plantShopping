@@ -1,4 +1,4 @@
-.landing-page {
+.background-image {
   position: relative;
   display: grid;
   min-height: 100vh;
@@ -78,7 +78,8 @@
   outline-offset: 3px;
 }
 
-.about-page {
+.about-page,
+.about-us-container {
   max-width: 760px;
   margin: 0 auto;
   padding: 76px 24px;

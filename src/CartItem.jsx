@@ -14,6 +14,18 @@ function CartItem() {
     0
   );
 
+  function handleIncrement(item) {
+    dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }));
+  }
+
+  function handleDecrement(item) {
+    dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }));
+  }
+
+  function handleRemove(item) {
+    dispatch(removeItem(item.id));
+  }
+
   return (
     <div className="cart-page">
       <nav className="navbar" aria-label="Main navigation">
@@ -46,7 +58,7 @@ function CartItem() {
         </div>
       ) : (
         <>
-          <div className="cart-items">
+          <div className="cart-container">
             {items.map((item) => (
               <div className="cart-item" key={item.id}>
                 <img src={item.image} alt={item.name} />
@@ -61,14 +73,7 @@ function CartItem() {
 
                   <div className="quantity-controls">
                     <button
-                      onClick={() =>
-                        dispatch(
-                          updateQuantity({
-                            id: item.id,
-                            quantity: item.quantity - 1,
-                          })
-                        )
-                      }
+                      onClick={() => handleDecrement(item)}
                       aria-label={`Decrease ${item.name} quantity`}
                     >
                       −
@@ -77,14 +82,7 @@ function CartItem() {
                     <span>{item.quantity}</span>
 
                     <button
-                      onClick={() =>
-                        dispatch(
-                          updateQuantity({
-                            id: item.id,
-                            quantity: item.quantity + 1,
-                          })
-                        )
-                      }
+                      onClick={() => handleIncrement(item)}
                       aria-label={`Increase ${item.name} quantity`}
                     >
                       +
@@ -92,9 +90,9 @@ function CartItem() {
                   </div>
 
                   <button
-                    className="remove-button"
+                    className="remove-button cart-item-delete"
                     aria-label={`Delete ${item.name} from cart`}
-                    onClick={() => dispatch(removeItem(item.id))}
+                    onClick={() => handleRemove(item)}
                   >
                     Delete
                   </button>

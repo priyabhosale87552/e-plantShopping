@@ -10,7 +10,7 @@ function AboutUs() {
         <Link to="/plants">Plants</Link>
         <Link to="/cart">Cart</Link>
       </nav>
-      <main className="about-page">
+      <main className="about-page about-us-container">
         <p className="section-eyebrow">OUR STORY</p>
         <h1>About Paradise Nursery</h1>
         <p>
@@ -22,6 +22,11 @@ function AboutUs() {
           From easy-care favorites to statement-making foliage, our collection
           makes it simple to find the right plant for your home and your
           experience level.
+        </p>
+        <p>
+          Our mission is to make plant ownership joyful and accessible. We
+          provide a thoughtfully curated selection of houseplants and helpful
+          guidance so every customer can find and care for a plant they love.
         </p>
         <Link className="text-link" to="/plants">Explore our plants</Link>
       </main>

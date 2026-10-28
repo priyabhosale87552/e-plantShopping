@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from './redux/CartSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ProductList.css';
 
 const plantCategories = [
@@ -42,15 +42,34 @@ const plantCategories = [
 
 function ProductList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const addedToCart = Object.fromEntries(
+    cartItems.map((item) => [item.name, true])
+  );
+
+  function handleHomeClick(event) {
+    event.preventDefault();
+    navigate('/');
+  }
+
+  function handlePlantsClick(event) {
+    event.preventDefault();
+    navigate('/plants');
+  }
+
+  function handleCartClick(event) {
+    event.preventDefault();
+    navigate('/cart');
+  }
 
   return (
     <div className="product-page">
       <nav className="navbar" aria-label="Main navigation">
-        <Link to="/">Home</Link>
-        <Link to="/plants">Plants</Link>
-        <Link to="/cart" aria-label={`Shopping cart, ${cartCount} items`}>
+        <Link to="/" onClick={handleHomeClick}>Home</Link>
+        <Link to="/plants" onClick={handlePlantsClick}>Plants</Link>
+        <Link to="/cart" onClick={handleCartClick} aria-label={`Shopping cart, ${cartCount} items`}>
           <span aria-hidden="true">🛒</span> Cart <span className="cart-count">{cartCount}</span>
         </Link>
       </nav>
@@ -66,7 +85,7 @@ function ProductList() {
           <h2>{category.name}</h2>
           <div className="plant-grid">
             {category.plants.map((plant) => {
-              const isAdded = cartItems.some((item) => item.id === plant.id);
+              const isAdded = Boolean(addedToCart[plant.name]);
 
               return (
                 <article className="plant-card" key={plant.id}>
