@@ -1,35 +1,53 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { removeItem, updateQuantity } from './redux/CartSlice';
 import './CartItem.css';
 
-function CartItem() {
+function CartItem({ onHomeClick }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const items = useSelector((state) => state.cart.items);
   const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   const total = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item.cost * item.quantity,
     0
   );
+
+  function handleParadiseNurseyClick(event) {
+    event.preventDefault();
+    if (onHomeClick) {
+      onHomeClick();
+      return;
+    }
+    navigate('/');
+  }
+
+  function handleContinueShopping() {
+    navigate('/plants');
+  }
 
   function handleIncrement(item) {
     dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }));
   }
 
   function handleDecrement(item) {
+    if (item.quantity <= 1) {
+      handleRemove(item);
+      return;
+    }
     dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }));
   }
 
   function handleRemove(item) {
-    dispatch(removeItem(item.id));
+    dispatch(removeItem(item.name));
   }
 
   return (
     <div className="cart-page">
       <nav className="navbar" aria-label="Main navigation">
-        <Link to="/">Home</Link>
+        <Link to="/" onClick={handleParadiseNurseyClick}>Home</Link>
         <Link to="/plants">Plants</Link>
         <Link
           to="/cart"
@@ -52,23 +70,33 @@ function CartItem() {
           </p>
           <h2>Your cart is waiting to bloom.</h2>
           <p>Your cart is empty. Let&apos;s find some plants!</p>
-          <Link className="action-button" to="/plants">
+          <button
+            className="get-started-button"
+            onClick={handleContinueShopping}
+            type="button"
+          >
             Continue Shopping
-          </Link>
+          </button>
         </div>
       ) : (
         <>
           <div className="cart-container">
             {items.map((item) => (
               <div className="cart-item" key={item.id}>
-                <img src={item.image} alt={item.name} />
+                <img
+                  className="cart-item-image"
+                  src={item.image}
+                  alt={item.name}
+                />
 
                 <div className="cart-item-details">
-                  <h2>{item.name}</h2>
-                  <p>Unit price: ${item.price.toFixed(2)}</p>
+                  <h2 className="cart-item-name">{item.name}</h2>
+                  <p className="cart-item-cost">
+                    Unit price: ${item.cost.toFixed(2)}
+                  </p>
                   <p>
                     Item total ({item.quantity}): $
-                    {(item.price * item.quantity).toFixed(2)}
+                    {(item.cost * item.quantity).toFixed(2)}
                   </p>
 
                   <div className="quantity-controls">
@@ -105,10 +133,18 @@ function CartItem() {
             <p>{cartCount} items in your cart</p>
             <h2>Order total: ${total.toFixed(2)}</h2>
             <div className="cart-actions">
-              <Link className="action-button action-button-secondary" to="/plants">
+              <button
+                className="get-started-button"
+                onClick={handleContinueShopping}
+                type="button"
+              >
                 Continue Shopping
-              </Link>
-              <button onClick={() => window.alert('Checkout is coming soon!')}>
+              </button>
+              <button
+                className="get-started-button1"
+                onClick={() => window.alert('Checkout is coming soon!')}
+                type="button"
+              >
                 Checkout
               </button>
             </div>

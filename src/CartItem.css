@@ -140,6 +140,33 @@
   gap: 12px;
 }
 
+.cart-actions .get-started-button {
+  border: 1px solid #2e6b40;
+  background: transparent;
+  color: #285d38;
+  cursor: pointer;
+}
+
+.cart-actions .get-started-button:hover {
+  background: #e7eee1;
+}
+
+.get-started-button1 {
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 6px;
+  background: #2e6b40;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.get-started-button1:hover {
+  background: #1f512f;
+}
+
 .action-button-secondary {
   border: 1px solid #2e6b40;
   background: transparent;

@@ -4,43 +4,43 @@ import { addItem } from './redux/CartSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import './ProductList.css';
 
-const plantCategories = [
+const plantsArray = [
   {
     name: 'Air Purifying Plants',
     plants: [
-      { id: 1, name: 'Snake Plant', description: 'A sculptural, resilient favorite that thrives in a range of light.', price: 15, image: 'https://images.unsplash.com/photo-1593482892290-f54927ae2b7b' },
-      { id: 2, name: 'Peace Lily', description: 'Elegant white blooms and glossy leaves bring a peaceful touch.', price: 18, image: 'https://images.unsplash.com/photo-1593691509543-c55fb32e5cee' },
-      { id: 3, name: 'Spider Plant', description: 'A cheerful, easy-growing plant with arching striped leaves.', price: 12, image: 'https://images.unsplash.com/photo-1572688484438-313a6e50c333' },
-      { id: 4, name: 'Areca Palm', description: 'Feathery fronds add a bright, tropical feel to any room.', price: 22, image: 'https://images.unsplash.com/photo-1597055181300-e3633a917c2b' },
-      { id: 5, name: 'Rubber Plant', description: 'Bold, glossy foliage makes this a striking indoor statement.', price: 20, image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6' },
-      { id: 6, name: 'Boston Fern', description: 'Soft, cascading fronds bring lush greenery to shelves and planters.', price: 16, image: 'https://images.unsplash.com/photo-1459156212016-c812468e2115' },
+      { id: 1, name: 'Snake Plant', description: 'A sculptural, resilient favorite that thrives in a range of light.', cost: 15, image: 'https://images.unsplash.com/photo-1593482892290-f54927ae2b7b' },
+      { id: 2, name: 'Peace Lily', description: 'Elegant white blooms and glossy leaves bring a peaceful touch.', cost: 18, image: 'https://images.unsplash.com/photo-1593691509543-c55fb32e5cee' },
+      { id: 3, name: 'Spider Plant', description: 'A cheerful, easy-growing plant with arching striped leaves.', cost: 12, image: 'https://images.unsplash.com/photo-1572688484438-313a6e50c333' },
+      { id: 4, name: 'Areca Palm', description: 'Feathery fronds add a bright, tropical feel to any room.', cost: 22, image: 'https://images.unsplash.com/photo-1597055181300-e3633a917c2b' },
+      { id: 5, name: 'Rubber Plant', description: 'Bold, glossy foliage makes this a striking indoor statement.', cost: 20, image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6' },
+      { id: 6, name: 'Boston Fern', description: 'Soft, cascading fronds bring lush greenery to shelves and planters.', cost: 16, image: 'https://images.unsplash.com/photo-1459156212016-c812468e2115' },
     ],
   },
   {
     name: 'Low Maintenance Plants',
     plants: [
-      { id: 7, name: 'ZZ Plant', description: 'Glossy, upright leaves make this a low-fuss choice for busy homes.', price: 19, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
-      { id: 8, name: 'Jade Plant', description: 'A compact succulent with plump leaves and a tree-like shape.', price: 14, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
-      { id: 9, name: 'Aloe Vera', description: 'A sun-loving succulent with distinctive, fleshy green leaves.', price: 10, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
-      { id: 10, name: 'Pothos', description: 'Fast-growing trailing vines brighten shelves and hanging planters.', price: 13, image: 'https://images.unsplash.com/photo-1497250681960-ef046c08a56e' },
-      { id: 11, name: 'Monstera', description: 'Iconic split leaves give this tropical beauty a bold silhouette.', price: 25, image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b' },
-      { id: 12, name: 'Chinese Evergreen', description: 'Colorful patterned leaves thrive with minimal day-to-day care.', price: 17, image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6' },
+      { id: 7, name: 'ZZ Plant', description: 'Glossy, upright leaves make this a low-fuss choice for busy homes.', cost: 19, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
+      { id: 8, name: 'Jade Plant', description: 'A compact succulent with plump leaves and a tree-like shape.', cost: 14, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
+      { id: 9, name: 'Aloe Vera', description: 'A sun-loving succulent with distinctive, fleshy green leaves.', cost: 10, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
+      { id: 10, name: 'Pothos', description: 'Fast-growing trailing vines brighten shelves and hanging planters.', cost: 13, image: 'https://images.unsplash.com/photo-1497250681960-ef046c08a56e' },
+      { id: 11, name: 'Monstera', description: 'Iconic split leaves give this tropical beauty a bold silhouette.', cost: 25, image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b' },
+      { id: 12, name: 'Chinese Evergreen', description: 'Colorful patterned leaves thrive with minimal day-to-day care.', cost: 17, image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6' },
     ],
   },
   {
     name: 'Decorative Plants',
     plants: [
-      { id: 13, name: 'Calathea', description: 'Decorative leaves with intricate patterns bring color and movement.', price: 21, image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6' },
-      { id: 14, name: 'Bird of Paradise', description: 'Large, tropical leaves create a dramatic focal point indoors.', price: 30, image: 'https://images.unsplash.com/photo-1597055181300-e3633a917c2b' },
-      { id: 15, name: 'Fiddle Leaf Fig', description: 'Oversized violin-shaped leaves make a statement in bright rooms.', price: 28, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
-      { id: 16, name: 'Philodendron', description: 'Heart-shaped leaves and trailing stems add a soft, leafy accent.', price: 20, image: 'https://images.unsplash.com/photo-1497250681960-ef046c08a56e' },
-      { id: 17, name: 'Anthurium', description: 'Vibrant, heart-shaped blooms pair beautifully with glossy leaves.', price: 24, image: 'https://images.unsplash.com/photo-1593691509543-c55fb32e5cee' },
-      { id: 18, name: 'Dracaena', description: 'Architectural, upright foliage brings an elegant modern touch.', price: 18, image: 'https://images.unsplash.com/photo-1593482892290-f54927ae2b7b' },
+      { id: 13, name: 'Calathea', description: 'Decorative leaves with intricate patterns bring color and movement.', cost: 21, image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6' },
+      { id: 14, name: 'Bird of Paradise', description: 'Large, tropical leaves create a dramatic focal point indoors.', cost: 30, image: 'https://images.unsplash.com/photo-1597055181300-e3633a917c2b' },
+      { id: 15, name: 'Fiddle Leaf Fig', description: 'Oversized violin-shaped leaves make a statement in bright rooms.', cost: 28, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09' },
+      { id: 16, name: 'Philodendron', description: 'Heart-shaped leaves and trailing stems add a soft, leafy accent.', cost: 20, image: 'https://images.unsplash.com/photo-1497250681960-ef046c08a56e' },
+      { id: 17, name: 'Anthurium', description: 'Vibrant, heart-shaped blooms pair beautifully with glossy leaves.', cost: 24, image: 'https://images.unsplash.com/photo-1593691509543-c55fb32e5cee' },
+      { id: 18, name: 'Dracaena', description: 'Architectural, upright foliage brings an elegant modern touch.', cost: 18, image: 'https://images.unsplash.com/photo-1593482892290-f54927ae2b7b' },
     ],
   },
 ];
 
-function ProductList() {
+function ProductList({ onHomeClick }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
@@ -49,8 +49,12 @@ function ProductList() {
     cartItems.map((item) => [item.name, true])
   );
 
-  function handleHomeClick(event) {
+  function handleParadiseNurseyClick(event) {
     event.preventDefault();
+    if (onHomeClick) {
+      onHomeClick();
+      return;
+    }
     navigate('/');
   }
 
@@ -67,7 +71,7 @@ function ProductList() {
   return (
     <div className="product-page">
       <nav className="navbar" aria-label="Main navigation">
-        <Link to="/" onClick={handleHomeClick}>Home</Link>
+        <Link to="/" onClick={handleParadiseNurseyClick}>Home</Link>
         <Link to="/plants" onClick={handlePlantsClick}>Plants</Link>
         <Link to="/cart" onClick={handleCartClick} aria-label={`Shopping cart, ${cartCount} items`}>
           <span aria-hidden="true">🛒</span> Cart <span className="cart-count">{cartCount}</span>
@@ -80,10 +84,10 @@ function ProductList() {
         <p>Find the perfect green companion for your home.</p>
       </header>
 
-      {plantCategories.map((category) => (
+      {plantsArray.map((category) => (
         <section className="plant-category" key={category.name}>
           <h2>{category.name}</h2>
-          <div className="plant-grid">
+          <div className="plant-grid product-list">
             {category.plants.map((plant) => {
               const isAdded = Boolean(addedToCart[plant.name]);
 
@@ -92,7 +96,7 @@ function ProductList() {
                   <img src={plant.image} alt={plant.name} />
                   <h3>{plant.name}</h3>
                   <p className="plant-description">{plant.description}</p>
-                  <p>${plant.price.toFixed(2)}</p>
+                  <p>${plant.cost.toFixed(2)}</p>
                   <button
                     disabled={isAdded}
                     onClick={() => dispatch(addItem(plant))}
